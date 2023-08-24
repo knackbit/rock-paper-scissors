@@ -15,3 +15,18 @@ Function to play one round and compare the player and computer selection, then r
 game() function that will use the previous one round function to play a 5 round game that keeps score and reports a winner or loser
 
 */
+
+// gets computer choice randomly of Rock, Paper, Scissors and returns the name value as a string
+
+function getComputerChoice() {
+    const randomNumChoice = Math.floor(Math.random() * 3);
+    if (randomNumChoice === 1) {
+        return "rock"
+    }
+    else if (randomNumChoice === 2) {
+        return "paper"
+    }
+    else {
+        return "scissors"
+    }
+}
