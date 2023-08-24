@@ -26,7 +26,7 @@ function getComputerChoice() {
     else if (randomNumChoice === 2) {
         return "paper"
     }
-    else {
+    else if (randomNumChoice === 0) {
         return "scissors"
     }
 }
