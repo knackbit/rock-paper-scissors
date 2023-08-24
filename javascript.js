@@ -45,3 +45,21 @@ function playerSelection() {
         }
     }
 }
+// Rock beats Scissors, Scissors beats paper, paper beats Rock
+function playRound() {
+    const playerValue = playerSelection();
+    const computerValue = getComputerChoice();
+    // check if player won
+    if ((playerValue === "rock" && computerValue === "scissors") || (playerValue === "scissors" && computerValue === "paper") || (playerValue === "paper" && computerValue === "rock")) {
+        return 1
+    } 
+    // check for a tie
+    else if (playerValue === computerValue) {
+        return 0
+    }
+    // player lost
+    else {
+        return -1
+    }
+}
+
