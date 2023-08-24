@@ -30,3 +30,18 @@ function getComputerChoice() {
         return "scissors"
     }
 }
+
+// prompt for player choice of Rock paper scissors, if it's valid return the value
+function playerSelection() {
+    while (true) {
+        let rawPlayerSelection = prompt("Choose Rock, Paper, or Scissors: ");
+        let lowerPlayerSelection = rawPlayerSelection.toLowerCase();
+        if (lowerPlayerSelection === "rock" || lowerPlayerSelection === "paper" || lowerPlayerSelection === "scissors") {
+            return lowerPlayerSelection;
+        }
+        else {
+            console.log("Invalid choice");
+            continue;
+        }
+    }
+}
