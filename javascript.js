@@ -62,4 +62,32 @@ function playRound() {
         return -1
     }
 }
+//  play 5 rounds, keeps score, and then determines winner at the end
+function game() {
+    let score = 0;
+    // loop through game 5 times
+    for (let i = 0; i < 5; i++) {
+        let roundScore = playRound();
+        score += roundScore;
+        if (roundScore === 1) {
+            console.log("You won the Round!");
+        }
+        else if (roundScore === 0) {
+            console.log("You Tied.");
+        }
+        else if (roundScore === -1) {
+            console.log("You lost the Round!");
+        }
+    }
+    if (score > 0) {
+        console.log("Congratulations.  You won the game!!!");
+    }
+    else if (score === 0) {
+        console.log("You tied");
+    }
+    else if (score < 0) {
+        console.log("Sorry.  You lost the game.")
+    }
+}
 
+game();
