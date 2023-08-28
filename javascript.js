@@ -32,6 +32,7 @@ function getComputerChoice() {
 }
 
 // prompt for player choice of Rock paper scissors, if it's valid return the value
+/*
 function playerSelection() {
     while (true) {
         let rawPlayerSelection = prompt("Choose Rock, Paper, or Scissors: ");
@@ -45,9 +46,13 @@ function playerSelection() {
         }
     }
 }
+*/
+
+
+
 // Rock beats Scissors, Scissors beats paper, paper beats Rock
-function playRound() {
-    const playerValue = playerSelection();
+function playRound(arg) {
+    const playerValue = arg
     const computerValue = getComputerChoice();
     // check if player won
     if ((playerValue === "rock" && computerValue === "scissors") || (playerValue === "scissors" && computerValue === "paper") || (playerValue === "paper" && computerValue === "rock")) {
@@ -62,8 +67,22 @@ function playRound() {
         return -1
     }
 }
+
+const createButton = (...idValue) => {
+    for (let arg of idValue) {
+        const btn = document.createElement('button');
+        btn.setAttribute('id', arg);
+        btn.textContent = arg;
+        btn.addEventListener('click', function() {playRound(arg);});
+        container.appendChild(btn);
+    }
+}
 //  play 5 rounds, keeps score, and then determines winner at the end
 function game() {
+
+    createButton('rock', 'paper', 'scissors');
+
+
     let score = 0;
     // loop through game 5 times
     for (let i = 0; i < 5; i++) {
@@ -90,4 +109,3 @@ function game() {
     }
 }
 
-game();
