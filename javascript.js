@@ -1,7 +1,6 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 let userSelection = "";
-const contain = document.querySelector("#container"); 
 
 
 function getComputerChoice() {
@@ -24,6 +23,7 @@ function determineWinner() {
     // check if player won
     if ((userSelection === "rock" && computerValue === "scissors") || (userSelection === "scissors" && computerValue === "paper") || (userSelection === "paper" && computerValue === "rock")) {
         playerWinCount++;
+        console.log('you won');
         return 1;
     } 
     // check for a tie
@@ -33,23 +33,24 @@ function determineWinner() {
     // player lost
     else {
         computerWinCount++;
+        console.log('you lost');
         return -1;
     }
 }
 
 
 const createButton = (...idValue) => {
+    const container = document.getElementById('container');
     for (let arg of idValue) {
         const btn = document.createElement('button');
         btn.setAttribute('id', arg);
         btn.textContent = arg;
         //btn.addEventListener('click', function(e) {playRound(e.target.id);});
         btn.addEventListener('click', function(e) {
-            setUserSelection(e.target.id);
-            determineWinner();
-            checkScoreLimit();
-        })
-        contain.appendChild(btn);
+        setUserSelection(e.target.id)});
+        btn.addEventListener('click', determineWinner);
+        btn.addEventListener('click', checkScoreLimit);
+        container.appendChild(btn);
     }
 }
 
@@ -83,5 +84,4 @@ const displayGameWinner = (winnerBinary) => {
     }
 
 }
-
-createButton('rock', 'paper', 'scissors');
+window.onload = function() {createButton('rock', 'paper', 'scissors')};
