@@ -1,6 +1,8 @@
 let playerWinCount = 0;
 let computerWinCount = 0;
 let userSelection = "";
+let playerDiv = null;
+let computerDiv = null;
 
 
 function getComputerChoice() {
@@ -23,18 +25,25 @@ function determineWinner() {
     // check if player won
     if ((userSelection === "rock" && computerValue === "scissors") || (userSelection === "scissors" && computerValue === "paper") || (userSelection === "paper" && computerValue === "rock")) {
         playerWinCount++;
-        console.log('you won');
-        return 1;
+        if (checkScoreLimit()) {
+            return;
+        }
+        displayRoundResults();
+        return;
     } 
     // check for a tie
     else if (userSelection === computerValue) {
-        return 0;
+        displayRoundResults();
+        return;
     }
     // player lost
     else {
         computerWinCount++;
-        console.log('you lost');
-        return -1;
+        if (checkScoreLimit()) {
+            return;
+        }
+        displayRoundResults();
+        return;
     }
 }
 
@@ -48,21 +57,23 @@ const createButton = (...idValue) => {
         //btn.addEventListener('click', function(e) {playRound(e.target.id);});
         btn.addEventListener('click', function(e) {
         setUserSelection(e.target.id)});
-        btn.addEventListener('click', determineWinner);
-        btn.addEventListener('click', checkScoreLimit);
         container.appendChild(btn);
     }
 }
 
 const setUserSelection = (selection) => {
     userSelection = selection;
+    determineWinner();
 }
 
 
 const checkScoreLimit = () => {
     if ((playerWinCount >= 5) || (computerWinCount >= 5 )) {
+        displayRoundResults();
         displayGameWinner(determineGameWinner());
+        return true;
     }
+    else return false;
 }
 
 const determineGameWinner = () => {
@@ -75,13 +86,32 @@ const determineGameWinner = () => {
 }
 
 const displayGameWinner = (winnerBinary) => {
+    const winnerDiv = document.createElement('div');
     const results = document.querySelector('#results');
     if (winnerBinary) {
-        results.textContent = "You won the game";
+        winnerDiv.textContent = "You won the game";
     }
     else {
-        results.textContent = "You lost the game";
+        winnerDiv.textContent = "You lost the game";
     }
+    results.appendChild(winnerDiv);
+}
 
+const addDisplayElements = () => {
+    if (document.querySelector('.player') ===  null) {
+        const results = document.querySelector('#results');
+        playerDiv = document.createElement('div');
+        computerDiv = document.createElement('div');
+        playerDiv.setAttribute('class', 'player');
+        results.appendChild(playerDiv);
+        results.appendChild(computerDiv);
+    }
+}
+
+const displayRoundResults = () => {
+    addDisplayElements();
+    playerDiv.textContent = "Player Wins: " + playerWinCount;
+    computerDiv.textContent = "Computer Wins: " + computerWinCount;
+    //if (document.querySelector('.player') !==  null)
 }
 window.onload = function() {createButton('rock', 'paper', 'scissors')};
